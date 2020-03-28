@@ -91,7 +91,7 @@ export default [
       {
         key: "5-2",
         title: "管理员",
-        path: "",
+        path: "/admin/root/administrator",
         icon: <ToolOutlined/>,
       },
     ]
