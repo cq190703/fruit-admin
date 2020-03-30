@@ -41,7 +41,7 @@ export default [
       {
         key: "3-1",
         title: "订单列表",
-        path: "",
+        path: "/admin/order",
         icon: <FileTextOutlined/>,
       },
       {

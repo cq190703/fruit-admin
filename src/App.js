@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import GoodList from "./pages/GoodsList";
 import Administrator from './pages/Root/Administrator';
 import Login from './pages/Login'
+import OrderList from "./pages/OrderList";
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
             <Admin>
               <Route path="/admin/home" component={Home}/>
               <Route path="/admin/goods/list" component={GoodList}/>
+              <Route path="/admin/order" component={OrderList}/>
 
 
               <Route path="/admin/root/administrator" component={Administrator}></Route>
