@@ -4,10 +4,12 @@ import Admin from "./pages/Admin";
 import Home from "./pages/Home";
 import GoodList from "./pages/GoodsList";
 import Administrator from './pages/Root/Administrator';
+import Login from './pages/Login'
 function App() {
   return (
     <div className="App">
       <Router>
+        <Route path='/login' component={Login}></Route>
         <Route path="/admin" render={() => {
           return (
             <Admin>
