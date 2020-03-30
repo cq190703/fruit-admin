@@ -28,7 +28,7 @@ export default [
       {
         key: "2-2",
         title: "精选",
-        path: "",
+        path: "/admin/goods/choice",
         icon: <HeartOutlined/>,
       },
     ]
