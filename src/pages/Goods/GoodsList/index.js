@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card,message,Table,Tag,Button,Popconfirm} from 'antd'
+import {Card,message,Table,Tag,Button,Popconfirm,Pagination} from 'antd'
 import goodsApi from '../../../api/goods'
 import style from './index.module.less'
 
@@ -36,18 +36,18 @@ class GoodsList extends Component {
         return(
           <div className={style.action}>
             <Popconfirm title='你确定要删除该商品嘛?'
-            onConfirm={()=>{this.delGodds(recode._id)}}
+            onConfirm={()=>{this.delGoods(recode._id)}}
             >
               <Button type='danger' size='small'>删除</Button>
             </Popconfirm>
-            <Popconfirm title='你确定要修改该商品的状态嘛?'
-            onConfirm={()=>{this.putAwayGodds(recode._id,recode.putaway)}}
+            <Popconfirm title='你确定要修改该商品的状态吗?'
+            onConfirm={()=>{this.putAwayGoods(recode._id,recode.putaway)}}
             >
               <Button type='warn' size='small'>上架</Button>
             </Popconfirm>
             <Button type='primary' size='small' onClick={()=>{
               // 跳转到修改页面 传递要修改的id 
-              this.props.history.replace('/admin/goodsInfoUpdate/'+recode._id)
+              this.props.history.replace('/admin/update/'+recode._id)
             }}>修改</Button>
           </div>
         )
@@ -57,20 +57,52 @@ class GoodsList extends Component {
   componentDidMount(){
     this.getListData()
   }
+  //删除商品
+  delGoods=async(_id)=>{
+    let {err,msg}=await goodsApi.del(_id)
+    if(err!==0){return message.error(msg)}
+    this.getListData()
+  }
   //获取商品信息
   getListData=async()=>{
     let {page,pageSize}=this.state
     let {err,msg,list,count}=await goodsApi.list(page,pageSize)
     if(err!==0){return message.error(msg)}
     this.setState({list,count})
-    console.log(this.state)
+  }
+  //更改状态信息
+  putAwayGoods=async(_id,putaway)=>{
+    console.log(putaway)
+    if(putaway ===0||putaway === -1){
+      putaway = 1
+    }else{
+      putaway = 0
+    }
+    let {err,msg}=await goodsApi.putaway(_id,putaway)
+    if(err!==0){return message.error(msg)}
+    this.getListData()
   }
   render() {
-    let {columns,list}=this.state
+    let {columns,list,count,pageSize}=this.state
     return (
       <div className={style.box}>
         <Card title='商品列表' className={style.card}>
-          <Table columns={columns} dataSource={list} rowKey='_id' className={style.table}></Table>
+        <Button type='primary' onClick={()=>{
+             this.props.history.push('/admin/add')
+           }}>商品添加</Button>
+          <Table scroll={ {y:500,x:840} } pagination={false} columns={columns} dataSource={list} rowKey='_id' className={style.table}></Table>
+          <Pagination 
+              total={count} 
+              showQuickJumper 
+              pageSize={pageSize}
+              onChange={(page,pageSize)=>{
+                //只要页码数发生改变就会触发   
+                console.log(page)       
+                this.setState({page},()=>{
+                  this.getListData()
+                })   
+              }}
+              />
         </Card>
       </div>
     );
