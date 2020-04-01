@@ -18,7 +18,6 @@ class Admin extends Component {
   };
 
   render() {
-    console.log(this.props.children)
     return (
       <Layout className={style.main}>
         {/* 侧边栏 */}
