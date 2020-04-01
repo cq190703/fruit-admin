@@ -47,6 +47,8 @@ export default class Administrator extends Component {
     if(result.err===0){
       message.success('删除成功')
       this.getList()
+    }else{
+      message.error(result.msg)
     }
   }
   componentDidMount(){
@@ -74,6 +76,12 @@ export default class Administrator extends Component {
         visible: false,
       });
       this.getList()
+    }else{
+      message.error(result.msg)
+      this.setState({
+        visible: false,
+        confirmLoading: false,
+      })
     }
 
   }
@@ -85,6 +93,7 @@ export default class Administrator extends Component {
   };
   getList = async()=>{
     let result = await api.list()
+    if(result.err===402){return false}
     this.setState({dataSource:result.msg})
   }
   render() {

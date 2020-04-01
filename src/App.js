@@ -1,10 +1,11 @@
 import React from 'react';
-import {HashRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {HashRouter as Router, Route,} from "react-router-dom";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
 import GoodList from "./pages/GoodsList";
 import Administrator from './pages/Root/Administrator';
 import Login from './pages/Login'
+import TokenModal from './component/TokenModal/index'
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,7 @@ function App() {
           )
         }}>
         </Route>
+        <TokenModal></TokenModal>
       </Router>
     </div>
   );
