@@ -9,7 +9,9 @@ import api from '../../api/admin'
     let { userName,passWord } = e;
     api.login({userName,passWord})
     .then((data)=>{
+      console.log(data)
       if(data.code===0){
+        localStorage.setItem('token',data.token)
         message.success('登陆成功，3秒钟后跳转首页',3,()=>{
           this.props.history.replace('/admin')
         })

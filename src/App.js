@@ -9,6 +9,8 @@ import GoodsUpdate from "./pages/Goods/GoodsUpdate";
 import Administrator from './pages/Root/Administrator';
 import Login from './pages/Login'
 
+import TokenModal from './component/TokenModal/index'
+import OrderList from "./pages/OrderList";
 function App() {
   return (
     <div className="App">
@@ -22,11 +24,15 @@ function App() {
               <Route path="/admin/goods/choice" component={GoodsChoice}/>
               <Route path="/admin/add" component={GoodsAdd}/>
               <Route path="/admin/update/:id" component={GoodsUpdate}/>
+              <Route path="/admin/order" component={OrderList}/>
+
+
               <Route path="/admin/root/administrator" component={Administrator}></Route>
             </Admin>
           )
         }}>
         </Route>
+        <TokenModal></TokenModal>
       </Router>
     </div>
   );
